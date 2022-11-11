@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models import Count
 
 class Questions(models.Model):
     title=models.CharField(max_length=250)
@@ -11,7 +11,10 @@ class Questions(models.Model):
 
     @property
     def question_answers(self):
-        return self.answers_set.all()
+        qs=self.answers_set.all().annotate(u_count=Count('upvote')).order_by('-u_count')
+       
+        
+        return qs
 
 
     def __str__(self):

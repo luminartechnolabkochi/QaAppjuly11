@@ -13,12 +13,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.ModelSerializer):
+    id=serializers.CharField(read_only=True)
     user=serializers.CharField(read_only=True)
     created_date=serializers.CharField(read_only=True)
     question=serializers.CharField(read_only=True)
+    votecount=serializers.CharField(read_only=True)
     class Meta:
         model=Answers
-        fields=["question","answer","user","created_date"]
+        fields=["id","question","answer","user","created_date","votecount"]
     
     def create(self,validated_data):
         ques=self.context.get("question")
