@@ -16,7 +16,7 @@ class UsersView(ModelViewSet):
 class QuestionsView(ModelViewSet):
     serializer_class=QuestionSerializer
     queryset=Questions.objects.all()
-    authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -56,7 +56,7 @@ class QuestionsView(ModelViewSet):
 class AnswersView(ModelViewSet):
     serializer_class=AnswerSerializer
     queryset=Answers.objects.all()
-    authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
 
     # localhost:8000/answers/1/up_vote
