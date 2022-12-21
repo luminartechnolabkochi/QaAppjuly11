@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 # Create your views here.
 from django.views.generic import CreateView,FormView,TemplateView
-from .forms import LoginForm,UserRegistrationForm
+from .forms import LoginForm,UserRegistrationForm,QuestionForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate,login
 
@@ -27,8 +27,9 @@ class SignInView(FormView):
             else:
                 return render(request,self.template_name,{"form":form})
 
-class IndexView(TemplateView):
+class IndexView(CreateView):
     template_name="index.html"
-
+    form_class=QuestionForm
+    success_url=reverse_lazy("index")
 
 
